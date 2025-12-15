@@ -10,6 +10,11 @@ import '../styles/global.css';
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>ёлка и сказка</title>
+    
+    <!-- Preload critical hero images -->
+    <link rel="preload" href="/src/assets/background.webp" as="image" type="image/webp" />
+    <link rel="preload" href="/src/assets/title.webp" as="image" type="image/webp" />
+    <link rel="preload" href="/src/assets/buy-tickets.webp" as="image" type="image/webp" />
   </head>
   <body class="bg-paper text-ink font-sans antialiased selection:bg-sand/30">
     <slot />

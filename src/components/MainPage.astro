@@ -1,15 +1,17 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import Description from "./Description.md";
-import background from "../assets/background.png";
-import buyTicketsImage from "../assets/buy-tickets.png";
+import background from "../assets/background.webp";
+import backgroundSmall from "../assets/background-800.webp";
+import buyTicketsImage from "../assets/buy-tickets.webp";
 import type { ImageMetadata } from "astro";
 
 interface Props {
   titleImage: ImageMetadata;
+  titleImageSmall: ImageMetadata;
 }
 
-const { titleImage } = Astro.props;
+const { titleImage, titleImageSmall } = Astro.props;
 ---
 
 <Layout>
@@ -24,18 +26,44 @@ const { titleImage } = Astro.props;
     >
       <!-- Background Image with Overlay -->
       <div class="absolute inset-0 -z-20">
-        <img src={background.src} alt="" class="w-full h-full object-cover" />
+        <picture>
+          <source 
+            srcset={backgroundSmall.src} 
+            media="(max-width: 768px)"
+            type="image/webp"
+          />
+          <img 
+            src={background.src} 
+            alt="" 
+            width="1024" 
+            height="1536"
+            class="w-full h-full object-cover" 
+            loading="eager"
+            decoding="sync"
+          />
+        </picture>
       </div>
 
       <!-- Sphere/Title -->
       <div
         class="relative w-full max-w-[600px] flex justify-center items-center group"
       >
-        <img
-          src={titleImage.src}
-          alt="ёлка и сказка"
-          class="w-full h-auto object-contain drop-shadow-md"
-        />
+        <picture>
+          <source 
+            srcset={titleImageSmall.src} 
+            media="(max-width: 768px)"
+            type="image/webp"
+          />
+          <img
+            src={titleImage.src}
+            alt="ёлка и сказка"
+            width="1024"
+            height="1536"
+            class="w-full h-auto object-contain drop-shadow-md"
+            loading="eager"
+            decoding="sync"
+          />
+        </picture>
 
         <!-- Button positioned inside the sphere (at the bottom) -->
         <div
@@ -48,7 +76,11 @@ const { titleImage } = Astro.props;
             <img
               src={buyTicketsImage.src}
               alt="купить билеты"
+              width="1536"
+              height="1024"
               class="w-full h-auto drop-shadow-sm"
+              loading="eager"
+              decoding="sync"
             />
           </a>
         </div>
@@ -132,11 +164,15 @@ const { titleImage } = Astro.props;
               href="https://qtickets.ru/event/198955"
               class="qtickets-button qtickets-reset qtickets-secondary block p-0 cursor-pointer focus:outline-none"
             >
-              <img
-                src={buyTicketsImage.src}
-                alt="купить билеты"
-                class="w-full h-auto drop-shadow-md"
-              />
+            <img
+              src={buyTicketsImage.src}
+              alt="купить билеты"
+              width="1536"
+              height="1024"
+              class="w-full h-auto drop-shadow-md"
+              loading="lazy"
+              decoding="async"
+            />
             </a>
           </div>
 
@@ -144,7 +180,11 @@ const { titleImage } = Astro.props;
             <img
               src="/artists.jpg"
               alt="наши музыканты"
+              width="1200"
+              height="800"
               class="w-full h-auto grayscale group-hover:grayscale-0 transition-all duration-700 ease-in-out"
+              loading="lazy"
+              decoding="async"
             />
           </div>
         </div>
