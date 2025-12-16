@@ -1,0 +1,18 @@
+---
+export interface Props {
+  type: 'instagram' | 'telegram' | 'discord';
+  class?: string;
+}
+
+const { type, class: className = 'w-5 h-5' } = Astro.props;
+
+const icons = {
+  instagram: () => import('@lucide/astro').then(mod => mod.Instagram),
+  telegram: () => import('@lucide/astro').then(mod => mod.Send),
+  discord: () => import('@lucide/astro').then(mod => mod.Discord),
+};
+
+const IconComponent = await icons[type]();
+---
+
+<IconComponent class={className} />
